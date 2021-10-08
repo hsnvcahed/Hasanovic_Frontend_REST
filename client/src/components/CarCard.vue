@@ -1,9 +1,9 @@
 <template>
-  <v-card class="d-flex flex-column">
-    <v-img :src="carData.image"></v-img>
+  <v-card class="d-flex flex-column" min-height="700">
+    <v-img max-height="400" :src="carData.image"></v-img>
 
     <v-card-title>
-      {{ carData.title }}
+      {{ carData.title }} <span v-if="carData.status == 'sold'"> *RESERVED*</span>
     </v-card-title>
 
     <v-card-subtitle>
@@ -20,13 +20,16 @@
       Miles:<span class="font-weight-bold"> {{ carData.miles }}</span>
     </v-card-subtitle>
     <v-card-subtitle>
-      Price:<span class="font-weight-bold"> {{ carData.price }}</span>
+      Price:<span v-if="carData.status != 'sold'" class="font-weight-bold"> {{ carData.price }}</span>
+      <span class="font-weight-bold" v-else>N/A</span>
     </v-card-subtitle>
 
     <v-card-actions>
-      <v-btn color="orange lighten-2" text>
-        Explore
-      </v-btn>
+      <div style="width:100%" class="d-flex justify-end" v-if="carData.status != 'sold'">
+        <v-btn :to="'/details/' + carData.id" class="purple white--text lighten-2" text>
+          Details
+        </v-btn>
+      </div>
 
       <v-spacer></v-spacer>
     </v-card-actions>

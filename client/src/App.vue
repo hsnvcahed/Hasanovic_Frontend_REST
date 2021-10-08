@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <LogoBar />
     <v-main>
       <router-view :cars="cars" />
     </v-main>
@@ -8,10 +9,13 @@
 
 <script>
 import axios from 'axios';
+import LogoBar from '@/components/LogoBar.vue';
 
 export default {
   name: 'App',
-
+  components: {
+    LogoBar,
+  },
   data: () => ({
     //
     cars: [],
